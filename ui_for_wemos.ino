@@ -11,7 +11,7 @@ const int pin_d6 = D6;
 const int pin_d7 = D7;
 const int pin_BL = D10;
 LiquidCrystal lcd(pin_RS, pin_EN, pin_d4, pin_d5, pin_d6, pin_d7);
-String Menu[] = {"Main Title         ", "Change Brightness      ", "Change LED Light    "};
+String Menu[] = {"Main Title         ", "Change Brightness      ", "Change LED Light    ", "Change LED Light3    "};
 bool selectingMenu;
 int currentMenu;
 int bl[] = {0, 50, 100, 150, 200, 255};
@@ -20,8 +20,7 @@ void setup()
 {
     pinMode(D0, OUTPUT);
     pinMode(D1, OUTPUT);
-    digitalWrite(D0, LOW);
-    digitalWrite(D1, HIGH);
+    pinMode(D2, OUTPUT);
     analogWrite(pin_BL, bl[sbl]);
     lcd.begin(16, 2);
 
@@ -54,6 +53,9 @@ void loop()
         case 2:
             controlLed(x);
             break;
+        case 3:
+            controlLed3(x);
+            break;
 
         default:
             break;
@@ -77,6 +79,9 @@ void loop()
                 break;
             case 2:
                 controlLedInit();
+                break;
+            case 3:
+                controlLed3Init();
                 break;
 
             default:
@@ -209,9 +214,9 @@ void controlLedInit()
     lcd.setCursor(0, 0);
     lcd.print("Change LED brightness            ");
     lcd.setCursor(0, 1);
-    lcd.print(getPadding(ledG[sLedG], "Green") + String(ledG[sLedG]));
+    lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
     lcd.setCursor(8, 1);
-    lcd.print(getPadding(ledR[sLedR], "Red") + String(ledR[sLedR]));
+    lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
 }
 void controlLed(int x)
 {
@@ -222,13 +227,13 @@ void controlLed(int x)
         {
             sLedG = 0;
             analogWrite(D0, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "Green") + String(ledG[sLedG]));
+            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
             return;
         }
 
         sLedG += 1;
         analogWrite(D0, ledG[sLedG]);
-        lcd.print(getPadding(ledG[sLedG], "Green") + String(ledG[sLedG]));
+        lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
     }
     else if (x < 200)
     {
@@ -237,13 +242,13 @@ void controlLed(int x)
         {
             sLedR = 0;
             analogWrite(D1, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "Red") + String(ledR[sLedR]));
+            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
             return;
         }
 
         sLedR += 1;
         analogWrite(D1, ledR[sLedR]);
-        lcd.print(getPadding(ledR[sLedR], "Red") + String(ledR[sLedR]));
+        lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
     }
     else if (x < 400)
     {
@@ -252,13 +257,13 @@ void controlLed(int x)
         {
             sLedR = 5;
             analogWrite(D1, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "Red") + String(ledG[sLedR]));
+            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
             return;
         }
 
         sLedR -= 1;
         analogWrite(D1, ledR[sLedR]);
-        lcd.print(getPadding(ledR[sLedR], "Red") + String(ledR[sLedR]));
+        lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
     }
     else if (x < 700)
     {
@@ -267,13 +272,13 @@ void controlLed(int x)
         {
             sLedG = 5;
             analogWrite(D0, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "Green") + String(ledG[sLedG]));
+            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
             return;
         }
 
         sLedG -= 1;
         analogWrite(D0, ledG[sLedG]);
-        lcd.print(getPadding(ledG[sLedG], "Green") + String(ledG[sLedG]));
+        lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
     }
 }
 
@@ -295,10 +300,165 @@ String getPadding(int num, String color)
     {
         padding += " ";
     }
-    for (int i = 0; i < 5 - color.length(); i++)
+    for (int i = 0; i < 1 - color.length(); i++)
     {
         padding += " ";
     }
 
     return color + padding;
+}
+
+int ledB[] = {0, 50, 100, 150, 200, 255};
+int sLedB = 5;
+int sColor = 0;
+
+void controlLed3Init()
+{
+    lcd.setCursor(0, 0);
+    lcd.print("Change LED brightness            ");
+    lcd.setCursor(0, 1);
+    lcd.print("                ");
+    lcd.setCursor(0, 1);
+    lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+    lcd.setCursor(5, 1);
+    lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+    lcd.setCursor(10, 1);
+    lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+}
+void controlLed3(int x)
+{
+    if (x < 60)
+    {
+        if (sColor == 2)
+        {
+            sColor = 0;
+        }
+        else
+        {
+            sColor += 1;
+        }
+    }
+    else if (x < 200)
+    {
+        changeBrightness(true);
+    }
+    else if (x < 400)
+    {
+        changeBrightness(false);
+    }
+    else if (x < 700)
+    {
+        if (sColor == 0)
+        {
+            sColor = 2;
+        }
+        else
+        {
+            sColor -= 1;
+        }
+    }
+}
+
+void changeBrightness(bool i)
+{
+    lcd.setCursor(sColor * 5, 1);
+    switch (sColor)
+    {
+    case 0:
+        if (i)
+        {
+            if (sLedR == *(&ledR + 1) - ledR - 1)
+            {
+                sLedR = 0;
+                analogWrite(D0, ledR[sLedR]);
+                lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+                return;
+            }
+
+            sLedR += 1;
+            analogWrite(D0, ledR[sLedR]);
+            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+        }
+        else
+        {
+            if (sLedR == 0)
+            {
+                sLedR = 5;
+                analogWrite(D0, ledR[sLedR]);
+                lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+                return;
+            }
+
+            sLedR -= 1;
+            analogWrite(D0, ledR[sLedR]);
+            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+        }
+
+        break;
+    case 1:
+        if (i)
+        {
+            if (sLedG == *(&ledG + 1) - ledG - 1)
+            {
+                sLedG = 0;
+                analogWrite(D1, ledG[sLedG]);
+                lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+                return;
+            }
+
+            sLedG += 1;
+            analogWrite(D1, ledG[sLedG]);
+            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+        }
+        else
+        {
+            if (sLedG == 0)
+            {
+                sLedG = 5;
+                analogWrite(D1, ledG[sLedG]);
+                lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+                return;
+            }
+
+            sLedG -= 1;
+            analogWrite(D1, ledG[sLedG]);
+            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+        }
+
+        break;
+    case 2:
+        if (i)
+        {
+            if (sLedB == *(&ledB + 1) - ledB - 1)
+            {
+                sLedB = 0;
+                analogWrite(D2, ledB[sLedB]);
+                lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+                return;
+            }
+
+            sLedB += 1;
+            analogWrite(D2, ledB[sLedB]);
+            lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+        }
+        else
+        {
+            if (sLedB == 0)
+            {
+                sLedB = 5;
+                analogWrite(D2, ledB[sLedB]);
+                lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+                return;
+            }
+
+            sLedB -= 1;
+            analogWrite(D2, ledB[sLedB]);
+            lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+        }
+
+        break;
+
+    default:
+        break;
+    }
 }
