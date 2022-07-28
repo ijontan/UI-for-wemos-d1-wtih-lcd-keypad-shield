@@ -2,8 +2,9 @@
 
 int bl[] = {0, 50, 100, 150, 200, 255};
 int sbl = 5;
+extern LiquidCrystal lcd;
 
-void controlBLInit(LiquidCrystal lcd, int pin_BL)
+void controlBLInit(int pin_BL)
 {
     analogWrite(pin_BL, bl[sbl]);
     lcd.setCursor(0, 0);
@@ -11,7 +12,7 @@ void controlBLInit(LiquidCrystal lcd, int pin_BL)
     lcd.setCursor(0, 1);
     lcd.print(String(bl[sbl]) + "              ");
 }
-void controlBL(LiquidCrystal lcd, int pin_BL, int x)
+void controlBL(int pin_BL, int x)
 {
     lcd.setCursor(0, 1);
     if (x < 60)

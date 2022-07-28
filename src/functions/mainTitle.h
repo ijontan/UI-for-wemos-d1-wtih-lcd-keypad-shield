@@ -1,6 +1,7 @@
 #include <LiquidCrystal.h>
+extern LiquidCrystal lcd;
 
-void mainTitleInit(LiquidCrystal lcd)
+void mainTitleInit()
 {
     lcd.setCursor(0, 0);
 
@@ -9,7 +10,7 @@ void mainTitleInit(LiquidCrystal lcd)
     lcd.print("Press Key:");
     lcd.setCursor(10, 1);
 }
-void mainTitle(LiquidCrystal lcd, int x)
+void mainTitle(int x)
 {
     lcd.setCursor(10, 1);
     if (x < 60)

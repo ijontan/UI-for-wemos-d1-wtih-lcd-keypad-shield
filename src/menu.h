@@ -1,7 +1,9 @@
 #include <LiquidCrystal.h>
 String Menu[] = {"Main Title         ", "Change Brightness      ", "LED Light2        ", "LED Light3        "};
 int currentMenu;
-void selectMenuInit(LiquidCrystal lcd)
+extern LiquidCrystal lcd;
+
+void selectMenuInit()
 {
     currentMenu = 0;
     lcd.setCursor(0, 0);
@@ -10,7 +12,7 @@ void selectMenuInit(LiquidCrystal lcd)
     lcd.print(Menu[currentMenu]);
 }
 
-void selectMenu(LiquidCrystal lcd, int x)
+void selectMenu(int x)
 {
     lcd.setCursor(0, 1);
     if (x > 60 && x < 200)

@@ -30,7 +30,7 @@ void setup()
 
     selectingMenu = false;
 
-    mainTitleInit(lcd);
+    mainTitleInit();
 }
 
 void loop()
@@ -41,24 +41,24 @@ void loop()
 
     if (selectingMenu)
     {
-        selectMenu(lcd, x);
+        selectMenu(x);
     }
     else
     {
         switch (currentMenu)
         {
         case 0:
-            mainTitle(lcd, x);
+            mainTitle(x);
 
             break;
         case 1:
-            controlBL(lcd, pin_BL, x);
+            controlBL(pin_BL, x);
             break;
         case 2:
-            controlLed(lcd, x);
+            controlLed(x);
             break;
         case 3:
-            controlLed3(lcd, x);
+            controlLed3(x);
             break;
 
         default:
@@ -75,17 +75,17 @@ void loop()
             switch (currentMenu)
             {
             case 0:
-                mainTitleInit(lcd);
+                mainTitleInit();
 
                 break;
             case 1:
-                controlBLInit(lcd, pin_BL);
+                controlBLInit(pin_BL);
                 break;
             case 2:
-                controlLedInit(lcd);
+                controlLedInit();
                 break;
             case 3:
-                controlLed3Init(lcd);
+                controlLed3Init();
                 break;
 
             default:
@@ -95,7 +95,7 @@ void loop()
         else
         {
             selectingMenu = true;
-            selectMenuInit(lcd);
+            selectMenuInit();
         }
     }
     delay(170);

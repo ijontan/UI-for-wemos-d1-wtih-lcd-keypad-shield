@@ -7,10 +7,11 @@ extern int ledB[6];
 extern int sLedB;
 extern int sColor;
 extern String getPadding(int num, String color);
+extern LiquidCrystal lcd;
 
-void changeBrightness(LiquidCrystal lcd, bool i);
+void changeBrightness(bool i);
 
-void controlLed3Init(LiquidCrystal lcd)
+void controlLed3Init()
 {
     lcd.setCursor(0, 0);
     lcd.print("Change LED brightness            ");
@@ -23,7 +24,7 @@ void controlLed3Init(LiquidCrystal lcd)
     lcd.setCursor(10, 1);
     lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
 }
-void controlLed3(LiquidCrystal lcd, int x)
+void controlLed3(int x)
 {
     if (x < 60)
     {
@@ -38,11 +39,11 @@ void controlLed3(LiquidCrystal lcd, int x)
     }
     else if (x < 200)
     {
-        changeBrightness(lcd, true);
+        changeBrightness(true);
     }
     else if (x < 400)
     {
-        changeBrightness(lcd, false);
+        changeBrightness(false);
     }
     else if (x < 700)
     {
@@ -57,7 +58,7 @@ void controlLed3(LiquidCrystal lcd, int x)
     }
 }
 
-void changeBrightness(LiquidCrystal lcd, bool i)
+void changeBrightness(bool i)
 {
     lcd.setCursor(sColor * 5, 1);
     switch (sColor)
