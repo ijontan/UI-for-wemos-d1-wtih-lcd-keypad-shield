@@ -13,9 +13,6 @@ void distanceTrackerInit()
     lcd.print("Distance Tracker");
     lcd.setCursor(0, 1);
     lcd.print("Distance:       ");
-
-    lcd.setCursor(14, 1);
-    lcd.print("cm");
 }
 
 void distanceTracker()
@@ -33,7 +30,15 @@ void distanceTracker()
     distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
     // Displays the distance on the Serial Monitor
     lcd.setCursor(11, 1);
-    lcd.print(getPaddingD(distance) + String(distance));
+    if (distance <= 500)
+    {
+        lcd.print(getPaddingD(distance) + String(distance) + "cm");
+    }
+    else
+    {
+        lcd.print("error");
+    }
+
     delay(500);
 }
 

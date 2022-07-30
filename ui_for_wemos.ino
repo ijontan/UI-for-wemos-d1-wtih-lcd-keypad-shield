@@ -17,8 +17,8 @@ const int pin_d5 = D5;
 const int pin_d6 = D6;
 const int pin_d7 = D7;
 const int pin_BL = D10;
-const int trigPin = D3;
-const int echoPin = D11;
+const int trigPin = D14;
+const int echoPin = D15;
 LiquidCrystal lcd(pin_RS, pin_EN, pin_d4, pin_d5, pin_d6, pin_d7);
 
 bool selectingMenu;
