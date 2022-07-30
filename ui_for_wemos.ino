@@ -7,6 +7,7 @@
 #include "src/functions/control_LED/control_led2.h"
 #include "src/functions/control_LED/control_led3.h"
 #include "src/functions/control_LED/led_var.h"
+#include "src/functions/distanceTracker.h"
 
 // LCD pin to Arduino
 const int pin_RS = D8;
@@ -16,6 +17,8 @@ const int pin_d5 = D5;
 const int pin_d6 = D6;
 const int pin_d7 = D7;
 const int pin_BL = D10;
+const int trigPin = D3;
+const int echoPin = D11;
 LiquidCrystal lcd(pin_RS, pin_EN, pin_d4, pin_d5, pin_d6, pin_d7);
 
 bool selectingMenu;
@@ -25,6 +28,8 @@ void setup()
     pinMode(D0, OUTPUT);
     pinMode(D1, OUTPUT);
     pinMode(D2, OUTPUT);
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
 
     lcd.begin(16, 2);
 
@@ -60,6 +65,9 @@ void loop()
         case 3:
             controlLed3(x);
             break;
+        case 4:
+            distanceTracker();
+            break;
 
         default:
             break;
@@ -87,6 +95,9 @@ void loop()
             case 3:
                 controlLed3Init();
                 break;
+            case 4:
+                distanceTrackerInit();
+                break;
 
             default:
                 break;
@@ -98,5 +109,4 @@ void loop()
             selectMenuInit();
         }
     }
-    delay(170);
 }
