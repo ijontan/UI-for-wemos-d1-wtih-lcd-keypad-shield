@@ -19,20 +19,25 @@ void controlLedInit()
     lcd.setCursor(8, 1);
     lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
 }
+
+static void exitCLED2()
+{
+    delay(170);
+}
 void controlLed(int x)
 {
-    if (x < 60)
+    atexit(exitCLED2);
+    if (x < 70)
     {
         lcd.setCursor(0, 1);
         if (sLedG == *(&ledG + 1) - ledG - 1)
         {
             sLedG = 0;
-            analogWrite(D0, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
-            return;
         }
-
-        sLedG += 1;
+        else
+        {
+            sLedG += 1;
+        }
         analogWrite(D0, ledG[sLedG]);
         lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
     }
@@ -42,27 +47,25 @@ void controlLed(int x)
         if (sLedR == *(&ledR + 1) - ledR - 1)
         {
             sLedR = 0;
-            analogWrite(D1, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
-            return;
         }
-
-        sLedR += 1;
+        else
+        {
+            sLedR += 1;
+        }
         analogWrite(D1, ledR[sLedR]);
         lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
     }
-    else if (x < 400)
+    else if (x < 450)
     {
         lcd.setCursor(8, 1);
         if (sLedR == 0)
         {
             sLedR = 5;
-            analogWrite(D1, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
-            return;
         }
-
-        sLedR -= 1;
+        else
+        {
+            sLedR -= 1;
+        }
         analogWrite(D1, ledR[sLedR]);
         lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
     }
@@ -72,13 +75,13 @@ void controlLed(int x)
         if (sLedG == 0)
         {
             sLedG = 5;
-            analogWrite(D0, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
-            return;
         }
-
-        sLedG -= 1;
+        else
+        {
+            sLedG -= 1;
+        }
         analogWrite(D0, ledG[sLedG]);
         lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
     }
+    delay(170);
 }

@@ -26,7 +26,7 @@ void controlLed3Init()
 }
 void controlLed3(int x)
 {
-    if (x < 60)
+    if (x < 70)
     {
         if (sColor == 2)
         {
@@ -41,7 +41,7 @@ void controlLed3(int x)
     {
         changeBrightness(true);
     }
-    else if (x < 400)
+    else if (x < 450)
     {
         changeBrightness(false);
     }
@@ -56,6 +56,7 @@ void controlLed3(int x)
             sColor -= 1;
         }
     }
+    delay(170);
 }
 
 void changeBrightness(bool i)
@@ -69,29 +70,25 @@ void changeBrightness(bool i)
             if (sLedR == *(&ledR + 1) - ledR - 1)
             {
                 sLedR = 0;
-                analogWrite(D0, ledR[sLedR]);
-                lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
-                return;
             }
-
-            sLedR += 1;
-            analogWrite(D0, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+            else
+            {
+                sLedR += 1;
+            }
         }
         else
         {
             if (sLedR == 0)
             {
                 sLedR = 5;
-                analogWrite(D0, ledR[sLedR]);
-                lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
-                return;
             }
-
-            sLedR -= 1;
-            analogWrite(D0, ledR[sLedR]);
-            lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
+            else
+            {
+                sLedR -= 1;
+            }
         }
+        analogWrite(D0, ledR[sLedR]);
+        lcd.print(getPadding(ledR[sLedR], "R") + String(ledR[sLedR]));
 
         break;
     case 1:
@@ -100,29 +97,26 @@ void changeBrightness(bool i)
             if (sLedG == *(&ledG + 1) - ledG - 1)
             {
                 sLedG = 0;
-                analogWrite(D1, ledG[sLedG]);
-                lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
-                return;
             }
+            else
+            {
 
-            sLedG += 1;
-            analogWrite(D1, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+                sLedG += 1;
+            }
         }
         else
         {
             if (sLedG == 0)
             {
                 sLedG = 5;
-                analogWrite(D1, ledG[sLedG]);
-                lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
-                return;
             }
-
-            sLedG -= 1;
-            analogWrite(D1, ledG[sLedG]);
-            lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
+            else
+            {
+                sLedG -= 1;
+            }
         }
+        analogWrite(D1, ledG[sLedG]);
+        lcd.print(getPadding(ledG[sLedG], "G") + String(ledG[sLedG]));
 
         break;
     case 2:
@@ -131,29 +125,25 @@ void changeBrightness(bool i)
             if (sLedB == *(&ledB + 1) - ledB - 1)
             {
                 sLedB = 0;
-                analogWrite(D2, ledB[sLedB]);
-                lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
-                return;
             }
-
-            sLedB += 1;
-            analogWrite(D2, ledB[sLedB]);
-            lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+            else
+            {
+                sLedB += 1;
+            }
         }
         else
         {
             if (sLedB == 0)
             {
                 sLedB = 5;
-                analogWrite(D2, ledB[sLedB]);
-                lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
-                return;
             }
-
-            sLedB -= 1;
-            analogWrite(D2, ledB[sLedB]);
-            lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
+            else
+            {
+                sLedB -= 1;
+            }
         }
+        analogWrite(D2, ledB[sLedB]);
+        lcd.print(getPadding(ledB[sLedB], "B") + String(ledB[sLedB]));
 
         break;
 

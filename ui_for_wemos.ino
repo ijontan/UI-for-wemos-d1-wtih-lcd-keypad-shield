@@ -66,7 +66,7 @@ void loop()
         }
     }
 
-    if (x > 700 && x < 1000)
+    if (x >= 700 && x < 1023)
     {
         lcd.print("Select");
         if (selectingMenu)

@@ -13,7 +13,7 @@ void mainTitleInit()
 void mainTitle(int x)
 {
     lcd.setCursor(10, 1);
-    if (x < 60)
+    if (x < 70)
     {
         lcd.print("Right ");
     }
@@ -21,7 +21,7 @@ void mainTitle(int x)
     {
         lcd.print("Up    ");
     }
-    else if (x < 400)
+    else if (x < 450)
     {
         lcd.print("Down  ");
     }
@@ -29,4 +29,5 @@ void mainTitle(int x)
     {
         lcd.print("Left  ");
     }
+    delay(170);
 }

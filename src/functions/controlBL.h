@@ -15,33 +15,32 @@ void controlBLInit(int pin_BL)
 void controlBL(int pin_BL, int x)
 {
     lcd.setCursor(0, 1);
-    if (x < 60)
+    if (x < 70)
     {
         if (sbl == 0)
         {
             sbl = 5;
-            analogWrite(pin_BL, bl[sbl]);
-            lcd.print(String(bl[sbl]) + "              ");
-            return;
         }
+        else
 
-        sbl -= 1;
-        analogWrite(pin_BL, bl[sbl]);
-        lcd.print(String(bl[sbl]) + "              ");
+        {
+            sbl -= 1;
+        }
     }
-    else if (x > 400 && x < 700)
+    else if (x > 450 && x < 700)
     {
 
         if (sbl == *(&bl + 1) - bl - 1)
         {
             sbl = 0;
-            analogWrite(pin_BL, bl[sbl]);
-            lcd.print(String(bl[sbl]) + "              ");
-            return;
         }
 
-        sbl += 1;
-        analogWrite(pin_BL, bl[sbl]);
-        lcd.print(String(bl[sbl]) + "              ");
+        else
+        {
+            sbl += 1;
+        }
     }
+    analogWrite(pin_BL, bl[sbl]);
+    lcd.print(String(bl[sbl]) + "              ");
+    delay(170);
 }
