@@ -12,7 +12,7 @@ void distanceTrackerInit()
     lcd.setCursor(0, 0);
     lcd.print("Distance Tracker");
     lcd.setCursor(0, 1);
-    lcd.print("Distance: ");
+    lcd.print("Distance:       ");
 
     lcd.setCursor(14, 1);
     lcd.print("cm");
@@ -34,7 +34,7 @@ void distanceTracker()
     // Displays the distance on the Serial Monitor
     lcd.setCursor(11, 1);
     lcd.print(getPaddingD(distance) + String(distance));
-    delay(200);
+    delay(500);
 }
 
 String getPaddingD(int num)
