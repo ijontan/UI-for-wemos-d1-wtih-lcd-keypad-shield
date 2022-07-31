@@ -13,6 +13,7 @@ void changeBrightness(bool i);
 
 void controlLed3Init()
 {
+
     lcd.setCursor(0, 0);
     lcd.print("Change LED brightness            ");
     lcd.setCursor(0, 1);

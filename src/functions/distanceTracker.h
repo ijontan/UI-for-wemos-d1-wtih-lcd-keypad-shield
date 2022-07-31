@@ -38,8 +38,44 @@ void distanceTracker()
     {
         lcd.print("error");
     }
+    if (distance <= 8 && distance >= 0)
+    {
+        analogWrite(D0, 255);
+    }
+    else if (distance < 150 && distance > 8)
+    {
+        float rR = abs(2000 / distance);
+        analogWrite(D0, rR);
+        analogWrite(D2, 0);
+        analogWrite(D1, 0);
+        Serial.print(rR);
+    }
 
-    delay(500);
+    if (distance < 300 && distance >= 292)
+    {
+        analogWrite(D2, 255);
+    }
+    else if (distance < 292 && distance > 150)
+    {
+        float rB = abs(2000 / (distance - 300));
+        analogWrite(D2, rB);
+        analogWrite(D0, 0);
+        analogWrite(D1, 0);
+        Serial.print(rB);
+    }
+
+    if (distance >= 142 && distance <= 158)
+    {
+        analogWrite(D1, 255);
+    }
+    else if (distance < 300 && distance > 0)
+    {
+        float rG = abs(2000 / (distance - 150));
+        analogWrite(D1, rG);
+        Serial.print(rG);
+    }
+
+    delay(100);
 }
 
 String getPaddingD(int num)
